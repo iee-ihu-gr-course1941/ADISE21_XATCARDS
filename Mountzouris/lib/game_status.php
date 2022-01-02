@@ -1,4 +1,6 @@
 <?php
+
+
 function show_status(){
     global $mysqli;
 
