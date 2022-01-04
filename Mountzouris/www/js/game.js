@@ -36,30 +36,26 @@ t1+='</tr>';
 $('#trapoula_board2').html(t1);
 }
 
-
-function fill_game() {
-    console.log('mpika');
+/*
+function fill_game() {  
     $.ajax({url: 'mountzouris.php/trapoula/', method:'get' ,success: fill_board_by_data});
-
     }
 
-function fill_board_by_data(data){
-    
-    console.log('mpika');
-    for (var i=0;i<=10;i++){
-        
-        console.log('HERE');
+function fill_board_by_data(data){ 
+    for (var i=0;i<=1;i++){
+        console.log('mpika2');
+       
         var o =data[i];   
-        if(o.number_player=1){
-        //var id = '#square_1'+'_'+ i; 
-        //var c = (o.symbol!=null)?o.index + o.symbol:'';
-        //$(id).addClass(o.index+'_square').html(c);
-        }else{
-           // var id1 = '#square_2'+'_'+ i; 
-           // var c = (o.symbol!=null)?o.index + o.symbol:'';
-            //$(id1).addClass(o.index+'_square').html(c);
-        }
+        //if(o.number_player=1){
+        var id = '#square_1'+'_'+ i; 
+        var c = (o.symbol!=null)?o.index + o.symbol:'';
+        $(id).addClass(o.index+'_square').html(c);
+       // }else{
+            var id1 = '#square_2'+'_'+ i; 
+            var c1 = (o.symbol!=null)?o.index + o.symbol:'';
+            $(id1).addClass(o.index+'_square').html(c1);
+        //}
     }
 
 
-}
+}*/
