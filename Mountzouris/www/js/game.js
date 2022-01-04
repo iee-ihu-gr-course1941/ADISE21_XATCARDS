@@ -42,19 +42,24 @@ function fill_game() {
     }
 
 function fill_board_by_data(data){ 
-    for (var i=0;i<=1;i++){
-        
-       
-        var o =data[i];   
-        //if(o.number_player=1){
-        var id = '#square_1'+'_'+ i; 
-        var c = (o.symbol!=null)?o.index + o.symbol:'';
-        $(id).addClass(o.index+'_square').html(c);
-       // }else{
-            var id1 = '#square_2'+'_'+ i; 
-            var c1 = (o.symbol!=null)?o.index + o.symbol:'';
-            $(id1).addClass(o.index+'_square').html(c1);
-        //}
+    var j=1;
+    var k=1;
+    for (var i=0;i<=data.length;i++){
+        var o = data[i];   
+        if(o.number_player==null){  
+        var id = '#square_2'+'_'+ k; 
+            var c = (o.symbol!=null)?o.index +"_"+ o.symbol:'';
+            var im = (o.symbol!=null)?'<img style=" width: 60px; height: 90px;  top: 0px;" class="fullo" src="images/'+c+'.webp">':'';
+            $(id).addClass(o.index+'_square').html(im);
+            k=k+1;
+        }
+        else{
+            var id = '#square_1'+'_'+ j; 
+        var c = (o.symbol!=null)?o.index +"_"+ o.symbol:'';
+        var im = (o.symbol!=null)?'<img style=" width: 60px; height: 90px; " class="fullo" src="images/'+c+'.webp">':'';
+        $(id).addClass(o.index+'_square').html(im);
+        j=j+1
+        }
     }
 
 
