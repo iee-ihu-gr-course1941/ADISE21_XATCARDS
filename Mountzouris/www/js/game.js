@@ -36,14 +36,14 @@ t1+='</tr>';
 $('#trapoula_board2').html(t1);
 }
 
-/*
+
 function fill_game() {  
     $.ajax({url: 'mountzouris.php/trapoula/', method:'get' ,success: fill_board_by_data});
     }
 
 function fill_board_by_data(data){ 
     for (var i=0;i<=1;i++){
-        console.log('mpika2');
+        
        
         var o =data[i];   
         //if(o.number_player=1){
@@ -58,4 +58,4 @@ function fill_board_by_data(data){
     }
 
 
-}*/
+}
