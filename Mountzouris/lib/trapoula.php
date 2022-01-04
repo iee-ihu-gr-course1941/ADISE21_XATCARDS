@@ -2,7 +2,7 @@
 function show_trapoula(){
     global $mysqli;
 
-    $sql = 'select * from trapoula_start';
+    $sql = 'select * from trapoula';
     $st = $mysqli ->prepare($sql);
 
     $st->execute();

@@ -8,10 +8,10 @@ $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
 
-header('Content-Type: text/plain');
-print "method=$method"."\n";
-print "path_info=".$_SERVER['PATH_INFO']."\n";
-print_r($request);
+//header('Content-Type: text/plain');
+//print "method=$method"."\n";
+//print "path_info=".$_SERVER['PATH_INFO']."\n";
+//print_r($request);
 
 switch($r=array_shift($request)){
     case "trapoula" :
