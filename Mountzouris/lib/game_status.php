@@ -39,7 +39,7 @@ function update_game_status(){
     $aborted = $res3->fetch_assoc()['aborted'];
     if($aborted>0){
         $sql= "UPDATE players SET username=NULL, token=NULL WHERE
-        last_action<(NOW() - INTERVAL 5 MINUTES");
+        last_action< (NOW() - INTERVAL 5 MINUTES)";
         $st2 = $mysqli->prepare($sql);
         $st2->execute();
         if($status['status']=='started'){
@@ -51,7 +51,7 @@ function update_game_status(){
     $st = $mysqli->prepare($sql);
     $st->execute();
     $res = $st->get_result();
-    $active_players = $res=>fetch_assoc()['c'];
+    $active_players = $res->fetch_assoc()['c'];
 
     switch($active_players){
         case 0: $new_status='not active';break;
