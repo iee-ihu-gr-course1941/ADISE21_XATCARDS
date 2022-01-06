@@ -50,12 +50,12 @@ function handle_trapoula($method){
 
     function handle_player($method, $p,$input){
         switch ($b=array_shift($p)){
-            //case '':
-            //case null: if($method=='GET') {show_users($method);} 
-            //            else {header("HTTP/1.1 400 Bad Request");
-            //            print json_encode(['errormesg'=>"Method
-            //            $method not allowed here."]);}
-            //break;
+            case '':
+            case null: if($method=='GET') {show_users($method);} 
+                        else {header("HTTP/1.1 400 Bad Request");
+                        print json_encode(['errormesg'=>"Method
+                        $method not allowed here."]);}
+            break;
             case '1':
             case '2': handle_user($method,$b,$input);
                         break;

@@ -2,8 +2,7 @@ var me={};
 var game_status={};
 
 $(function() {
-        //draw_empty_game();       
-        //fill_game();
+        
         $('#login').click(login_to_game);
     });
     
@@ -97,7 +96,7 @@ function login_result(data) {
     me = data[0]; 
     $('#game_initializer').hide();
     update_info();
-    //game_start();    
+    game_status_update(); 
 }
 
     function login_error(data,y,z,c) {
@@ -111,4 +110,28 @@ function login_result(data) {
             +me.username+'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+game_status.p_turn+' must play now.');
             
         }
+
+        function game_status_update() {  
+            $.ajax({url: 'mountzouris.php/status/', success: update_status });
+           
+            }
+
+            function update_status(data){
+                game_status=data[0];
+                update_info();
+                if(game_status.p_turn==me.number_player && me.number_player!=null) {
+                    x=0;
+                    //do play
+                    $(#move_div).show(1000);
+                    setTimeout(function() { game_status_update();}, 15000);
+                }else{
+                    //must wait for something
+                    $('#move_div').hide(1000);
+                    setTimeout(function()  { game_status_update();}, 4000);
+                }
+                }
+
+            
+
+
         
