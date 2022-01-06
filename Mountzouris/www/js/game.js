@@ -73,10 +73,10 @@ function login_to_game(){
             
            
         
-            //if($('#username').val()=='') {
-            //alert('You have to set a username');
-           // return;
-           // }
+            if($('#username').val()=='') {
+            alert('You have to set a username');
+            return;
+            }
             var p_number = $('#number').val();
             
             $.ajax({url: "mountzouris.php/players/"+p_number,
@@ -96,7 +96,7 @@ function login_result(data) {
     
     me = data[0]; 
     $('#game_initializer').hide();
-    //update_info();
+    update_info();
     //game_start();    
 }
 
@@ -104,5 +104,11 @@ function login_result(data) {
         var x = data.responseJSON;
        
         alert(x.errormesg);
+        }
+
+        function update_info(){
+            $('#game_info').html("I am Player: "+me.number_player+", my name is"
+            +me.username+'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+game_status.p_turn+' must play now.');
+            
         }
         
