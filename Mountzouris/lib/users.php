@@ -32,10 +32,11 @@ function set_user($b,$input){
     $username=$input['username'];
     global $mysqli;
     $sql = 'select count(*) as c from players where number_player=? and username is not null';
-    $st = $mysqli->prepera($sql);
+    $st = $mysqli->prepare($sql);
+    $st->bind_param('s',$b);
     $st->execute();
     $res = $st->get_result();
-    $e = $res->fetch_all(MYSQLI_ASSOC);
+    $r = $res->fetch_all(MYSQLI_ASSOC);
     if($r[0]['c']>0){
         header("HTTP/1.1 400 Bad Request");
         print json_encode(['errormesg'=>"Player $b is already set. Please select another color."]);
@@ -50,9 +51,9 @@ function set_user($b,$input){
 
     update_game_status();
     $sql = 'select * from players where number_player=?';
-    $st2 = $mysqli->prepare($sql);
-    $st2->bind_param('s',$b);
-    $st2->execute();
+    $st = $mysqli->prepare($sql);
+    $st->bind_param('s',$b);
+    $st->execute();
     $res = $st->get_result();
     header('Content-type: application/json');
     print json_encode($res->fetch_all(MYSQLI_ASSOC),JSON_PRETTY_PRINT);

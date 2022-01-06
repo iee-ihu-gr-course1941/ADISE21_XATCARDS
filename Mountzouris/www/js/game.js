@@ -2,8 +2,8 @@ var me={};
 var game_status={};
 
 $(function() {
-        draw_empty_game();       
-        fill_game();
+        //draw_empty_game();       
+        //fill_game();
         $('#login').click(login_to_game);
     });
     
@@ -51,7 +51,7 @@ function fill_board_by_data(data){
     
     for (var i=0;i<=data.length;i++){
         var o = data[i];   
-        console.log(o.number_player);
+        
         if(o.number_player==null){  
         var id = '#square_2'+'_'+ k; 
             var c = (o.symbol!=null)?o.index +"_"+ o.symbol:'';
@@ -71,16 +71,14 @@ function fill_board_by_data(data){
 }
 function login_to_game(){
             
-           console.log("here");
+           
         
             //if($('#username').val()=='') {
             //alert('You have to set a username');
            // return;
            // }
             var p_number = $('#number').val();
-            //draw_empty_game(); 
-            //fill_game();
-            var p_name = $('#username').val();
+            
             $.ajax({url: "mountzouris.php/players/"+p_number,
             method: 'PUT',
             dataType: "json",
@@ -89,13 +87,14 @@ function login_to_game(){
             number_player: p_number}),
             success: login_result,
             error: login_error});
-            
+            draw_empty_game(); 
+            fill_game();
+         
       
     }
 function login_result(data) {
-    console.log("mpika result1");
-    me = data[0];
-   
+    
+    me = data[0]; 
     $('#game_initializer').hide();
     //update_info();
     //game_start();    
@@ -103,7 +102,7 @@ function login_result(data) {
 
     function login_error(data,y,z,c) {
         var x = data.responseJSON;
-        //var x = JSON.text(data);
+       
         alert(x.errormesg);
         }
         
