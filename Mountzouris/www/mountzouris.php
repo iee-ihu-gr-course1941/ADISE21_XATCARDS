@@ -9,6 +9,12 @@ $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
 
+if(isset($_SERVER['HTTP_X_TOKEN'])){
+    $input['token']=$_SERVER['HTTP_X_TOKEN'];
+}else{
+    $input['token']='';
+}
+
 //header('Content-Type: text/plain');
 //print "method=$method"."\n";
 //print "path_info=".$_SERVER['PATH_INFO']."\n";
@@ -18,8 +24,11 @@ switch($r=array_shift($request)){
     case "trapoula" :
         switch ($b=array_shift($request)){
             case '':
-            case null: handle_trapoula($method);
+                
+            case null: handle_trapoula($method,$input);
                             break;
+            case 'fullo' : handle_fullo($method, $request[0],$request[1],$input);
+                break;
             }
             break;                    
       
@@ -29,7 +38,7 @@ switch($r=array_shift($request)){
         else {
             header("HTTP/1.1 404 Not found");}
         break;
-    case "players": handle_player($method, $request,$input);
+    case 'players': handle_player($method, $request,$input);
         break;
     default: header("HTTP/1.1 404 Not Found");
             exit;
@@ -37,21 +46,30 @@ switch($r=array_shift($request)){
                 
 }
 
-function handle_trapoula($method){
+function handle_trapoula($method,$input){
     if($method=='GET'){
-        show_trapoula();
+        show_trapoula($input);
     }else if ($method=='POST'){
-        reset_trapoula();
+        //reset_trapoula();
+        show_trapoula($input);
     }else {
         header("HTTP/1.1 405 Method Not Allowed");
 
     }
 }
 
+function handle_fullo($method,$x,$y,$input){
+    if($method=='GET'){
+        show_fyllo($x,$y);
+    }else if($method=='PUT'){
+       // move_fyllo($x,$y,$input['x'],$)
+    }
+}
+
     function handle_player($method, $p,$input){
         switch ($b=array_shift($p)){
-            case '':
-            case null: if($method=='GET') {show_users($method);} 
+           case '':
+           case null: if($method=='GET') {show_users($method);} 
                         else {header("HTTP/1.1 400 Bad Request");
                         print json_encode(['errormesg'=>"Method
                         $method not allowed here."]);}
